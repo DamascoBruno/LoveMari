@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💗 Para Você</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💗%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+
+<canvas id="estrelas"></canvas>
+<div id="detalhes-fundo" aria-hidden="true"></div>
+
+<!-- ============================================================
+     CARD: TEMPO JUNTOS
+     ============================================================ -->
+<div class="card card-tempo">
+  <p class="tempo-label">💗 juntos há</p>
+  <div class="tempo-grid">
+    <div class="tempo-bloco">
+      <span id="t-anos">0</span>
+      <small>anos</small>
+    </div>
+    <div class="tempo-bloco">
+      <span id="t-meses">0</span>
+      <small>meses</small>
+    </div>
+    <div class="tempo-bloco">
+      <span id="t-dias">0</span>
+      <small>dias</small>
+    </div>
+    <div class="tempo-bloco">
+      <span id="t-horas">0</span>
+      <small>horas</small>
+    </div>
+    <div class="tempo-bloco">
+      <span id="t-min">0</span>
+      <small>min</small>
+    </div>
+    <div class="tempo-bloco">
+      <span id="t-seg">0</span>
+      <small>seg</small>
+    </div>
+  </div>
+  <p class="tempo-sub">desde 26 de outubro de 2023 🥰</p>
+</div>
+
+<!-- ============================================================
+     CARD: QUANTO EU TE AMO
+     ============================================================ -->
+<div class="card card-amor">
+  <p class="amor-label">quanto eu te amo?</p>
+
+  <div class="slider-wrapper">
+    <input type="range" id="slider-amor" min="0" max="100" value="0" />
+    <div class="slider-marcas">
+      <span>um pouquinho</span>
+      <span>infinito ∞</span>
+    </div>
+  </div>
+
+  <div id="amor-resposta" class="amor-resposta">
+    <span id="amor-emoji">🤔</span>
+    <p id="amor-texto">arrasta pra descobrir…</p>
+  </div>
+
+  <!-- Explosão de corações ao chegar no infinito -->
+  <div id="infinito-kaboom" aria-hidden="true"></div>
+</div>
+
+<!-- ============================================================
+     CARD PRINCIPAL — frases
+     ============================================================ -->
+<div class="card">
+
+  <div id="coracao-container" onclick="crescerCoracao()" title="Clique em mim! 🥹">
+    <div id="coracao">💗</div>
+    <div id="tamanho-hint">clique pra crescer ↑</div>
+  </div>
+
+  <h1>Motivos para meu amor sorrir hoje ✨</h1>
+
+  <div id="caixa-frase">
+    <p id="frase">Clique no botão e descubra 💛</p>
+  </div>
+
+  <button id="btn-sortear" onclick="sortearFrase()">✨ Clique e veja um motivo!</button>
+
+  <div id="contador"></div>
+
+  <hr class="linha" />
+
+  <p class="rodape">
+    💡 <em>Dica secreta: clique 7 vezes no coração para uma surpresa especial…</em>
+  </p>
+
+</div>
+
+<footer class="assinatura">
+  feito com carinho 💝 by <strong>Bruno Abreu</strong>
+</footer>
+
+<!-- EASTER EGG -->
+<div id="easter-egg">
+  <div id="easter-box">
+    <h2>🎵 Você encontrou! 🎉</h2>
+    <p>Essa playlist é só nossa nenem. Cada música foi escolhida a dedo pensando em nós dois!! 💛</p>
+    <a id="btn-playlist"
+       href="https://open.spotify.com/playlist/5qg5w7egJX3ZqA6o2hRKBQ?si=a4ea92be59c94166"
+       target="_blank" rel="noopener">
+      🎵 Abrir playlist no Spotify
+    </a>
+    <button id="btn-fechar-egg" onclick="fecharEasterEgg()">fechar ✕</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

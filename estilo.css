@@ -1,0 +1,437 @@
+/* ============================================================
+   CORES E FONTES — mude aqui para personalizar o visual
+   ============================================================ */
+:root {
+  --cor-fundo: #fce4ed;
+  --cor-fundo2: #ffeedd;
+  --cor-primaria: #e05b8a;
+  --cor-secundaria: #f7a8c4;
+  --cor-texto: #4a2040;
+  --cor-coracoes: #e05b8a;
+  --fonte-titulo: 'Georgia', serif;
+  --fonte-texto: 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   GRADIENTE ANIMADO DE FUNDO
+   Troque as cores no @keyframes gradiente para mudar as cores
+   ============================================================ */
+body {
+  min-height: 100vh;
+  font-family: var(--fonte-texto);
+  color: var(--cor-texto);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+  position: relative;
+
+  /* gradiente animado — 3 posições de cor que se alternam suavemente */
+  background: linear-gradient(135deg, #fce4ed, #ffd6e8, #ffe8f5);
+  background-size: 400% 400%;
+  animation: gradiente 10s ease infinite;
+}
+
+@keyframes gradiente {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* ============================================================
+   CANVAS DAS ESTRELINHAS (fixo atrás de tudo)
+   ============================================================ */
+#estrelas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   DETALHES FOFOS DE FUNDO
+   Os elementos (💗 🌸 ✨ etc) são criados pelo script.js
+   e injetados aqui. Cada um recebe a classe .detalhe-fofo
+   ============================================================ */
+#detalhes-fundo {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.detalhe-fofo {
+  position: absolute;
+  font-size: 1.4rem;
+  opacity: 0;
+  animation: subir-fofo var(--dur, 8s) var(--delay, 0s) ease-in infinite;
+  user-select: none;
+}
+
+@keyframes subir-fofo {
+  0%   { transform: translateY(0)   rotate(0deg)   scale(0.8); opacity: 0;   }
+  15%  { opacity: 0.55; }
+  80%  { opacity: 0.35; }
+  100% { transform: translateY(-110vh) rotate(25deg) scale(1.1); opacity: 0; }
+}
+
+/* ============================================================
+   CARD PRINCIPAL
+   ============================================================ */
+.card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 2rem;
+  box-shadow: 0 8px 40px rgba(224, 91, 138, 0.18);
+  padding: 2.5rem 2rem;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ============================================================
+   CORAÇÃO ANIMADO
+   ============================================================ */
+#coracao-container {
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+}
+#coracao {
+  font-size: 3rem;
+  display: inline-block;
+  transition: transform 0.15s cubic-bezier(.36,2,.7,.8);
+  filter: drop-shadow(0 2px 8px rgba(224,91,138,0.3));
+}
+#coracao.pulsar {
+  animation: pulso 0.35s ease;
+}
+@keyframes pulso {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+#tamanho-hint {
+  font-size: 0.75rem;
+  color: var(--cor-secundaria);
+  margin-top: 0.2rem;
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+h1 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+  color: var(--cor-primaria);
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+/* ============================================================
+   CAIXA DA FRASE
+   ============================================================ */
+#caixa-frase {
+  background: rgba(252, 228, 237, 0.6);
+  border: 2px dashed var(--cor-secundaria);
+  border-radius: 1.2rem;
+  padding: 1.4rem 1.2rem;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: opacity 0.3s;
+}
+#frase {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  font-style: italic;
+}
+
+/* ============================================================
+   BOTÃO PRINCIPAL
+   ============================================================ */
+#btn-sortear {
+  background: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 2.2rem;
+  font-size: 1rem;
+  font-family: var(--fonte-texto);
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(224,91,138,0.35);
+  transition: transform 0.1s, box-shadow 0.1s;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.8rem;
+}
+#btn-sortear:hover  { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(224,91,138,0.4); }
+#btn-sortear:active { transform: translateY(0);    box-shadow: 0 2px 8px rgba(224,91,138,0.3); }
+
+/* ============================================================
+   CONTADOR DE CLIQUES
+   ============================================================ */
+#contador {
+  font-size: 0.8rem;
+  color: var(--cor-secundaria);
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================================
+   SEPARADOR
+   ============================================================ */
+.linha {
+  border: none;
+  border-top: 1.5px dashed var(--cor-fundo2);
+  margin: 1rem 0;
+}
+
+/* ============================================================
+   RODAPÉ DA CARD
+   ============================================================ */
+.rodape {
+  font-size: 0.78rem;
+  color: var(--cor-secundaria);
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   ASSINATURA "feito com carinho by Bruno Abreu"
+   Fica embaixo do card, discreta mas presente
+   ============================================================ */
+.assinatura {
+  position: relative;
+  z-index: 2;
+  margin-top: 1.4rem;
+  font-size: 0.78rem;
+  color: rgba(74, 32, 64, 0.55);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+.assinatura strong {
+  color: var(--cor-primaria);
+  font-weight: 600;
+}
+
+/* ============================================================
+   EASTER EGG — modal especial
+   ============================================================ */
+#easter-egg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(74,32,64,0.82);
+  align-items: center;
+  justify-content: center;
+}
+#easter-egg.ativo { display: flex; }
+
+#easter-box {
+  background: white;
+  border-radius: 2rem;
+  padding: 2.5rem 2rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.3);
+  animation: aparecer 0.4s cubic-bezier(.36,2,.7,.8);
+}
+@keyframes aparecer {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+#easter-box h2 {
+  font-family: var(--fonte-titulo);
+  color: var(--cor-primaria);
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+#easter-box p {
+  color: var(--cor-texto);
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+  font-size: 0.95rem;
+}
+
+#btn-playlist {
+  display: inline-block;
+  background: #1db954;
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: opacity 0.2s;
+  margin-bottom: 1rem;
+}
+#btn-playlist:hover { opacity: 0.87; }
+
+#btn-fechar-egg {
+  display: block;
+  background: none;
+  border: none;
+  color: var(--cor-secundaria);
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  margin: 0 auto;
+  font-family: var(--fonte-texto);
+}
+
+/* ============================================================
+   LAYOUT GERAL — cards empilhados com espaço entre eles
+   ============================================================ */
+body {
+  gap: 1.4rem;
+}
+
+/* ============================================================
+   CARD: TEMPO JUNTOS
+   ============================================================ */
+.card-tempo {
+  max-width: 480px;
+  width: 100%;
+}
+.tempo-label {
+  font-size: 0.85rem;
+  color: var(--cor-secundaria);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.tempo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+.tempo-bloco {
+  background: linear-gradient(135deg, #fce4ed, #ffd6e8);
+  border-radius: 1rem;
+  padding: 0.7rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+.tempo-bloco span {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cor-primaria);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.tempo-bloco small {
+  font-size: 0.68rem;
+  color: var(--cor-secundaria);
+  letter-spacing: 0.05em;
+}
+.tempo-sub {
+  font-size: 0.78rem;
+  color: var(--cor-secundaria);
+  margin-top: 0.2rem;
+}
+
+/* ============================================================
+   CARD: QUANTO EU TE AMO
+   ============================================================ */
+.card-amor {
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.amor-label {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  color: var(--cor-primaria);
+  margin-bottom: 1.2rem;
+}
+
+/* slider */
+.slider-wrapper {
+  margin-bottom: 1.2rem;
+}
+.slider-wrapper input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f7a8c4, #e05b8a);
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+}
+.slider-wrapper input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--cor-primaria);
+  box-shadow: 0 2px 8px rgba(224,91,138,0.35);
+  cursor: grab;
+  transition: transform 0.1s;
+}
+.slider-wrapper input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.15);
+}
+.slider-marcas {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--cor-secundaria);
+}
+
+/* resposta */
+.amor-resposta {
+  background: rgba(252,228,237,0.5);
+  border-radius: 1rem;
+  padding: 1rem;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: opacity 0.3s;
+}
+#amor-emoji { font-size: 2rem; flex-shrink: 0; }
+#amor-texto {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--cor-texto);
+  font-style: italic;
+  text-align: left;
+}
+
+/* explosão de corações no infinito */
+#infinito-kaboom {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.kaboom-coracao {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: kaboom-subir 1.2s ease-out forwards;
+}
+@keyframes kaboom-subir {
+  0%   { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-120px) scale(1.4) rotate(20deg); opacity: 0; }
+}
